@@ -29,6 +29,7 @@
             $result=$results->fetch();//result là array
             return $result;//trả về 1 array chứ 1 dòng
         }
+        // câu lệnh insert. update, delete do exec làm
         function exec($query){
             $result=$this->db->exec($query);
             return $result;

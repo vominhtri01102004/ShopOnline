@@ -1,9 +1,9 @@
 <?php
     class cthanghoa{
-        function insertCTHangHoa($mahh,$mamau,$masize,$dongia,$slt,$hinh,$giamgia)
+        function insertCTHangHoa($idhanghoa,$idsize,$soluongton)
         {
             $db=new connect();
-            $query="insert into cthanghoa(idhanghoa,idmau,idsize,dongia,soluongton,hinh,giamgia) values ($mahh,$mamau,$masize,$dongia,$slt,'$hinh',$giamgia)";
+            $query="insert into cthanghoa(idhanghoa, idsize, soluongton) values ($idhanghoa,$idsize,$soluongton)";
             $result=$db->exec($query);
             return $result;
         }

@@ -19,7 +19,7 @@
 
 								</form>
 
-			<p style="margin-top: 4%" align="center"><a href="">Back to Home</a>	</p>
+								<p style="margin-top: 4%" align="center"><a href="../ShopAo">Về trang người dùng</a>	</p>
 							</div>
 
 						</div>

@@ -310,7 +310,6 @@ tfoot,
 th,
 thead,
 tr {
-  border-color: inherit;
   border-style: solid;
   border-width: 0;
 }
@@ -1642,7 +1641,6 @@ progress {
   --bs-table-bg: transparent;
   --bs-table-accent-bg: transparent;
   --bs-table-striped-color: #212529;
-  --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
   --bs-table-active-color: #212529;
   --bs-table-active-bg: rgba(0, 0, 0, 0.1);
   --bs-table-hover-color: #212529;
@@ -6227,6 +6225,7 @@ fieldset:disabled .btn {
   position: sticky;
   top: 0;
   z-index: 1020;
+  background-color: white;
 }
 @media (min-width: 576px) {
   .sticky-sm-top {
@@ -7201,11 +7200,10 @@ fieldset:disabled .btn {
   --bs-text-opacity: 1;
 }
 .bg-primary {
-  --bs-bg-opacity: 1;
-  background-color: rgba(
-    var(--bs-primary-rgb),
-    var(--bs-bg-opacity)
-  ) !important;
+  background-color: rgb(188, 152, 106);
+}
+.lsmnuahang{
+  background-color: rgb(231, 227, 212);
 }
 .bg-secondary {
   --bs-bg-opacity: 1;

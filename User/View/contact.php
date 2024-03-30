@@ -64,10 +64,10 @@
               </div>
             </div>
             <?php
-            if (isset($_SESSION['masohd'])) {
-              $masohd = $_SESSION['masohd'];
-              $hd = new hoadon();
-              $kh = $hd->selectThongTinKH($masohd);
+            if (isset($_SESSION['makh'])) {
+              $makh = $_SESSION['makh'];
+              $us = new user();
+              $kh = $us->selectThongTinKH($makh);
               $tenkh = $kh['tenkh'];
               $username = $kh['username'];
               $email = $kh['email'];

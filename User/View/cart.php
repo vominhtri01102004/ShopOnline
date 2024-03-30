@@ -23,11 +23,16 @@
                 foreach ($_SESSION['cart'] as $key => $item) :
                   if ($item['soluongton'] < $item['soluong']) {
                     echo '<script> alert("Mặt Hàng Này Chỉ Còn ' . ($item['soluongton']) . '");</script>';
-                    echo '<meta http-equiv="refresh" content="0;url=./index.php?action=sanpham&act=sanphamchitiet&id=' . ($item['mahh']) . '"/>';
-                    if (isset($item['mahh']) && $item['soluongton'] < $item['soluong']) {
-                      unset($_SESSION['cart'][$key]);
-                    }
-                    // unset($_SESSION['cart']);
+                    unset($_SESSION['cart'][$key]);
+                    // echo '<meta http-equiv="refresh" content="0;url=./index.php?action=sanpham&act=sanphamchitiet&id=' . ($item['mahh']) . '"/>';
+                    // if (isset($item['mahh']) && $item['soluongton'] < $item['soluong']) {
+                    // }
+                    if (isset($item['mahh'])) {
+                      echo '<meta http-equiv="refresh" content="0;url=./index.php?action=sanpham&act=sanphamchitiet&id=' . ($item['mahh']) . '"/>';
+                  }
+                  else{
+                    echo '<meta http-equiv="refresh" content="0;url=./index.php?action=home"/>';
+                  }
                   }
                 ?>
                   <tr>
@@ -67,7 +72,8 @@
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-black decrease" type="button" onclick="decreaseQuantity(<?php echo $key; ?>)">&minus;</button>
                         </div>
-                        <input type="text" name="newqty[]" class="form-control text-center quantity-amount" value="<?php echo $item['soluong']; ?>" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                        <input type="text" name="newqty[]" class="form-control text-center quantity-amount" autocomplete="off"
+                         value="<?php echo $item['soluong']; ?>" aria-label="Example text with button addon" aria-describedby="button-addon1" />
                         <div class="input-group-append">
                           <button class="btn btn-outline-black increase" type="button" onclick="increaseQuantity(<?php echo $key; ?>)">&plus;</button>
                         </div>

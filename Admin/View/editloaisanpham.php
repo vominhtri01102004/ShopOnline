@@ -1,5 +1,6 @@
-<form name="frmloaihang" action="" method="post">
-  <div class="card mt-3">
+<div class="row">
+<form name="frmloaihang" action="" method="post" class="col-md-6">
+  <div class="card">
     <div class="card-header">
       QUẢN LÝ LOẠI HÀNG
     </div>
@@ -43,3 +44,4 @@
     </div>
   </div>
 </form>
+</div>

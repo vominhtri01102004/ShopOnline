@@ -22,7 +22,8 @@ h2{
     font-size: 30px;
     color: white;
 }
-p{ 
+p{
+    text-align: center;
     color: black;
 }
 
@@ -49,7 +50,8 @@ a:active{
 /* footer */
 .site-footer
 {
-  background: #efefef;
+  background-color:#26272b;
+  padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
   color:#737373;
@@ -65,7 +67,7 @@ a:active{
 }
 .site-footer h6
 {
-  color:#212529;
+  color:#fff;
   font-size:16px;
   text-transform:uppercase;
   margin-top:5px;
@@ -102,11 +104,19 @@ a:active{
 {
   display:inline-block
 }
+.site-footer .social-icons
+{
+  text-align:right
+}
 .site-footer .social-icons a
 {
-  transition: .3s all ease;
-  color: #2f2f2f;
-  text-decoration: underline;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  margin-left:6px;
+  margin-right:0;
+  border-radius:100%;
+  background-color:#33353d
 }
 .copyright-text
 {
@@ -143,6 +153,7 @@ a:active{
 }
 .social-icons li.title
 {
+  margin-right:15px;
   text-transform:uppercase;
   color:#96a2b2;
   font-weight:700;
@@ -196,6 +207,7 @@ a:active{
   .social-icons li.title
   {
     display:block;
+    margin-right:0;
     font-weight:600
   }
 }

@@ -1,12 +1,14 @@
 <?php
     function uploadImage()
     {
-        // B1: tạo được được đường dẫn chứa hình
-        $target_dir="../../DuAnMau/Content/imagetourdien/";
-        // b2: lấy tên hình từ server về gán vào trong đường dẫn trên
-        //$target_file="../../DuAnMau/Content/imagetourdien/hinh1.jpg";
+        // thiết lập đuoèng dẫn chứa hình
+        $target_dir="Content/imagetourdien/";
+        // lấy hình về và để vào trong đường dẫn thiết lập
+        //$target_file=../../DuAnMau/Content/imagetourdien/hoa.jpg
         $target_file=$target_dir.basename($_FILES['image']['name']);
-        // cần kiểm tra xem hình có được uplen server hay không
+        // lấy phần mở rộng của hình ra
+        $imagefileType=strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        // Kiểm tra xem hình đó có được upload lên server hay không
         $upload=1;
         if(isset($_POST['submit']))
         {
@@ -21,36 +23,33 @@
                 $upload=0;
             }
         }
-        // kiểm tra xem hình có tồn tại hay chưa
+        // kiểm tra xem hình đó có tồn tại trong thư mục hình chưa
         if(file_exists($target_file))
         {
             echo '<script>alert("Hình đã tồn tại");</script>';
             $upload=0;
         }
-        // kiểm tra xem hình lấy từ server về có vượt quá dung lượng hay không
-        // 500kb=500000b
+        // kiểm tra hình có vượt quá dung lượng hay không 500kb=500000b
         if($_FILES['image']['size']>500000)
         {
             echo '<script>alert("Hình vượt quá dung lượng");</script>';
             $upload=0;
         }
-        // có phải hình hay không, lấy phần mở rộng
-        $imagefileType=strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        if($imagefileType!="jpg"&& $imagefileType!="jpeg"&& $imagefileType!="png"&& $imagefileType!="gif")
+        // kiểm tra có phải là hình hay không
+        if($imagefileType!="jpg" && $imagefileType!="png" && $imagefileType!="jpeg" && $imagefileType!="gif")
         {
-            echo '<script>alert("Ko phải hình");</script>';
+            echo '<script>alert("Không phải là hình");</script>';
             $upload=0;
         }
-        // tiến hành upload
         if($upload==1)
         {
             if(move_uploaded_file($_FILES['image']['tmp_name'],$target_file))
             {
-                echo '<script>alert("Upload hình thành công");</script>';
+                echo '<script>alert("Up hình thành công");</script>';
             }
             else
             {
-                echo '<script>alert("Upload hình ko thành công");</script>';
+                echo '<script>alert("Up hình ko thành công");</script>';
             }
         }
     }

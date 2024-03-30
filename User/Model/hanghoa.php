@@ -134,11 +134,11 @@ class hanghoa
     // phương thức tìm kiếm sản phẩm
     public function getTimKiem($timkiem)
     {
-         $db = new connect();
-         $select = "select a.mahh,a.tenhh,a.soluotxem,b.hinh,b.dongia,b.soluongton,c.mausac,b.giamgia
-             from hanghoa a,cthanghoa b, mausac c 
-             WHERE a.tenhh like '%$timkiem%' ORDER by a.mahh ";
-         $result = $db->getList($select);
-         return $result;
+        $db = new connect();
+        $select = "select DISTINCT a.mahh,a.tenhh,a.soluotxem,b.hinh,b.dongia,b.soluongton,b.giamgia
+            from hanghoa a,cthanghoa b
+            WHERE a.mahh=b.idhanghoa and a.tenhh like '%$timkiem%' ORDER by a.mahh ";
+        $result = $db->getList($select);
+        return $result;
     }
 }

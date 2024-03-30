@@ -29,10 +29,10 @@ switch ($act) {
                 $_SESSION['makh']=$logkh['makh'];
                 $_SESSION['tenkh']=$logkh['tenkh'];
                 echo '<script> alert("Đăng nhập thành công");</script>';
-                if (isset($_SESSION['cart'])) {
+                if (count($_SESSION['cart']) >0) {
                     echo '<meta http-equiv="refresh" content="0;url=./index.php?action=giohang"/>';
                 }
-                if (!isset($_SESSION['cart'])) {
+                if (count($_SESSION['cart']) <=0) {
                     echo '<meta http-equiv="refresh" content="0;url=./index.php?action=home"/>';
                 }
                 

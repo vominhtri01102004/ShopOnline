@@ -4,13 +4,7 @@
 // include "Model/loaisanpham.php";
 include_once "Model/uploadimage.php";
 session_start();
-
-
-
-// unset($_SESSION['admin']);
-
-
-
+//unset($_SESSION['admin']);
 spl_autoload_register("myModelClass");
 function myModelClass($classname)
 {
@@ -18,21 +12,17 @@ function myModelClass($classname)
     include $path.$classname.'.php';
 }
 ?>  
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Content/CSS/templatemo.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link href="Content/CSS/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="Content/CSS/style.css" rel="stylesheet">
-    <link href="Content/CSS/login.css" rel="stylesheet">
-    <link href="Content/CSS/Tour.css" rel="stylesheet">
-    <script src="Content/js/bootstrap.bundle.min.js"></script>
-
+  
+    <!-- <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
+    <!-- link đăng nhập -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -43,6 +33,7 @@ function myModelClass($classname)
     <!-- end -->
     <!-- end link đăng nhập -->
     <link rel="stylesheet" type="text/css" href="../Content/CSS/Tour.css" />
+    <title>Admin Shop đồ Tri</title>
 </head>
 
 <body>
@@ -52,12 +43,12 @@ function myModelClass($classname)
         {
             include "View/headder.php";
         }
-           
+            
         ?>
         <!-- end hinh dong -->
         <!-- phan thân -->
         <div class="container">
-        <div class="row">
+        <!-- <div class="row"> -->
         <?php
              //load controler
             $ctrl="dangnhap";
@@ -69,15 +60,15 @@ function myModelClass($classname)
         //end controller
             
         ?>
-        </div>
+        <!-- </div> -->
         <!-- end menu right -->
     </div>
     <!-- footer -->
     <?php
-     if(isset($_SESSION['admin']))
-     {
-        include "View/footer.php";
-     }
+    // if(isset($_SESSION['admin']))
+    // {
+    //     include "View/footer.php";
+    // }
     ?>
     <!-- end footer -->
    

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light shadow">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="nav-icon position-relative text-decoration-none" href="index.php?action=services">
             <ul class="chudau h1">
@@ -77,6 +77,7 @@
         <li class="bon" ><a class="sub-link" href="index.php?action=dangnhap&act=dangxuat"><i class="fa-solid fa-right-to-bracket fa-rotate-180 fa-lg"></i>Đăng Xuất</a></li>
         <li class="bon" ><a class="sub-link" href="index.php?action=lienhe"><i class="fa-solid fa-right-to-bracket fa-rotate-180 fa-lg"></i>Gửi ý Kiến Phản Hồi</a></li>
         <li class="bon" ><a class="sub-link" href="index.php?action=forget&act=doimatkhau"><i class="fa-solid fa-right-to-bracket fa-rotate-180 fa-lg"></i>Đổi mật Khẩu</a></li>
+        <li class="bon" ><a class="sub-link" href="index.php?action=user&act=lichsumuahang"><i class="fa-solid fa-right-to-bracket fa-rotate-180 fa-lg"></i>Lịch Sử Mua Hàng</a></li>
     </ul>';
                         }
                         // }
