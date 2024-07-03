@@ -1,11 +1,11 @@
 
 <div class="row col-md-4 col-md-offset-4" >
   <form action="index.php?action=cthanghoa&act=cthanghoa_action" method="post" enctype="multipart/form-data">
-    <table class="table" style="border: 0px;">
+    <table class="table bordernone">
 
       <tr>
         <td>Mã hàng hóa</td>
-        <td> <select name="mahh" class="form-control" style="width:150px;">
+        <td> <select name="mahh" class="form-control w-150px">
             <?php
               $hh=new hanghoa();
               $hang=$hh->getHangHoa();
@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <td>Màu sắc</td>
-        <td> <select name="mamau" class="form-control" style="width:150px;">
+        <td> <select name="mamau" class="form-control w-150px">
         <?php
               $hh=new hanghoa();
               $hang=$hh->getMau();
@@ -35,7 +35,7 @@
       </tr>
       <tr>
         <td>Size</td>
-        <td> <select name="masize" class="form-control" style="width:150px;">
+        <td> <select name="masize" class="form-control w-150px">
         <?php
               $hh=new hanghoa();
               $hang=$hh->getSize();

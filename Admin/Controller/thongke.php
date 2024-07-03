@@ -4,30 +4,40 @@ if (isset($_GET['act'])) {
     $act = $_GET['act'];
 }
 switch ($act) {
-    case 'thongke':
+    case 'thongkesanpham':
         include_once "./View/thongke.php";
         break;
-    case 'thongkethang':
-        include_once "./View/thongkethang.php";
+    case 'thongkedonhang':
+        include_once "./View/thongke.php";
         break;
-    case 'thongke_action':
+    case 'thongkedoanhthu':
+        include_once "./View/thongke.php";
+        break;
+    case 'thongkesanpham_action':
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_SESSION['nam'] = $_POST['nam'];
-            // echo "<script>alert($nam)</script>";
-            $hh = new hanghoa();
-            $thongKeResult = $hh->getThongKe($nam);
-            echo '<meta http-equiv=refresh content="0;url=./index.php?action=thongke&act=thongke"/>';
-        }
-        break;
-    case 'thongkethang_action':
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_SESSION['thang'] = $_POST['thang'];
-            // echo "<script>alert($nam)</script>";
             $hh = new hanghoa();
-            $thongKeResult = $hh->getThongKeThang($thang);
-            echo '<meta http-equiv=refresh content="0;url=./index.php?action=thongke&act=thongkethang"/>';
+            $thongKeResult = $hh->getThongKeSanPham($nam, $thang);
+            echo '<meta http-equiv=refresh content="0;url=./index.php?action=thongke&act=thongkesanpham"/>';
+            break;
         }
-        break;
-
+    case 'thongkedonhang_action':
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $_SESSION['nam'] = $_POST['nam'];
+            $_SESSION['thang'] = $_POST['thang'];
+            $hh = new hanghoa();
+            $thongKeResult = $hh->getThongKeDonHang($nam, $thang);
+            echo '<meta http-equiv=refresh content="0;url=./index.php?action=thongke&act=thongkedonhang"/>';
+            break;
+        }
+    case 'thongkedoanhthu_action':
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $_SESSION['nam'] = $_POST['nam'];
+            $_SESSION['thang'] = $_POST['thang'];
+            $hh = new hanghoa();
+            $thongKeResult = $hh->getThongKeDonHang($nam, $thang);
+            echo '<meta http-equiv=refresh content="0;url=./index.php?action=thongke&act=thongkedoanhthu"/>';
+            break;
+        }
 }
-?>

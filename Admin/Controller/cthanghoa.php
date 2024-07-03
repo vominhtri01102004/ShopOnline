@@ -26,11 +26,13 @@
                 uploadImage();
                 echo '<script>alert("Insert thành công");</script>';
                 echo '<meta http-equiv=refresh content="0;url=../index.php?action=cthanghoa"/>';
+                break;
             }
             else
             {
                 echo '<script>alert("Insert ko thành công");</script>';
                 echo '<meta http-equiv=refresh content="0;url=../index.php?action=cthanghoa"/>';
+                break;
             }
         }
         break;

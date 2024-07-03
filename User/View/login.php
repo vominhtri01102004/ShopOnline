@@ -1,9 +1,9 @@
-<header>
+<header class="mt-4">
   <div class="app">
     <form action="index.php?action=dangnhap&act=dangnhap_action" method="post">
       <h1>Đăng Nhập</h1>
       <div class="input-box">
-        <input type="text" placeholder="Tên Đăng Nhập" required name="txtusername">
+        <input type="text" placeholder="Tên Đăng Nhập" autocomplete="off" required name="txtusername">
         <i class="bx bxs-user"></i>
       </div>
 
@@ -17,7 +17,6 @@
         <label> <input type="checkbox">Nhớ Tôi</label>
         <a href="index.php?action=forget">Quên Mật Khẩu</a>
       </div>
-
       <button type="submit" class="btn">Đăng Nhập</button>
 
       <div class="register-link">
@@ -26,3 +25,4 @@
     </form>
   </div>
   <header>
+    

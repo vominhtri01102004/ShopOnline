@@ -5,13 +5,13 @@
         <!-- <h3 class="text-center"><b>Login Now</b></h3> -->
         <form action="index.php?action=forget&act=forget_action" class="login-form" method="post" >
 
-          <div class="form-group" >
-            <label for="exampleInputEmail1" class="text-uppercase" >Nhập Email Của Bạn Để Đổi Mật Khẩu</label>
-            <input type="text" class="form-control" name="email" placeholder="Nhập Email ở Đây">
+          <div class="form-group mt-4" >
+            <label for="exampleInputEmail1" class="text-uppercase offset-1" >Nhập Email Để Đổi Mật Khẩu</label>
+            <input type="text" class="form-control" required name="email" placeholder="Nhập Email ở Đây">
 
           </div>
           <div class="form-check">
-            <input type="submit" name="submit_email">
+            <input type="submit" name="submit_email" class="btn vmt">
           </div>
 
         </form>

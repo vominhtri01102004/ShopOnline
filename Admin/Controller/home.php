@@ -1,7 +1,6 @@
 <?php
 
-    if (isset($_SESSION['admin'])) {
-        # code...
+    if (isset($_SESSION['chucvu'])) {
         include_once "./View/hanghoa.php";
     } else {
         echo '<script>alert("Bạn chưa đăng nhập")</script>';

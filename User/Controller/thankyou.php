@@ -7,7 +7,7 @@
         switch ($act) {
             case 'thankyou':
                 include_once "./View/thankyou.php";
-                unset($_SESSION['cart']);
+                
                 break;
             case 'thanks':
             include_once "./View/thanks.php";

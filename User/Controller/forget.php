@@ -12,6 +12,7 @@ switch ($act) {
         if (isset($_POST['submit_email'])) {
             $email = $_POST['email']; //lequocanh40029081@gmail.com
             // tạo mảng lưu thông tin email và passnew
+            $_SESSION['emailrepass'] = $email;
             $_SESSION['email'] = array();
             // kiểm tra xem email có tồn tại trong database không
             $kh = new user();
@@ -19,6 +20,7 @@ switch ($act) {
             if ($checkuser > 0) {
                 // cấp mã code ngẫu nhiên, hay pass mới
                 $code = random_int(1000, 1000000); //34567
+                $_SESSION['code_creation_time'] = time();
                 // tạo đối tượng
                 $item = array(
                     'id' => $code,
@@ -53,70 +55,108 @@ switch ($act) {
                 if ($mail->Send()) {
                     echo '<script> alert("Check Your Email and Click on the 
                         link sent to your email");</script>';
-                    include "./View/resetpw.php";
+                    echo '<meta http-equiv="refresh" content="0;url=./index.php?action=forget&act=resetpassword"/>';
+                    break;
                 } else {
                     echo "Mail Error - >" . $mail->ErrorInfo;
                     include "./View/forgetpassword.php";
+                    break;
                 }
                 // include "./View/resetpw.php";
             } else {
                 echo '<script> alert("Địa chỉ mail ko tồn tại");</script>';
                 include "./View/forgetpassword.php";
+                break;
             }
-
-
-
         }
         break;
-        case 'resetpass':
-            //nhận pass new mà người dùng nhập vào
-            if(isset($_POST['submit_password']))
-            {
-                $pass=$_POST['password'];
-                //dò lại trong session, đối tượng nào có pass giống với pass đó
-                foreach($_SESSION['email'] as $key=>$item)
-                {
-                    if($item['id']==$pass)
-                    {
-                        $salfF="G435#";
-                        $salfL="T34a!&";
-                        $passnew=md5($salfF.$pass.$salfL);
-                        //với id đó lấy lại email của người gửi email
-                        $emailold=$item['email'];
-                        $kh=new user();
-                        $kh->updateEmail($emailold,$passnew);
-                    }
+    case 'resetpassword':
+        include_once "./View/resetpw.php";
+        break;
+
+    case 'resetpass':
+        if (isset($_SESSION['code_creation_time']) && (time() - $_SESSION['code_creation_time']) > 90) {
+            echo '<script> alert("Mã Code đã hết hạn. Vui lòng yêu cầu lại mã.");</script>';
+            include "./View/forgetpassword.php";
+            break;
+        }
+        //nhận pass new mà người dùng nhập vào
+        if (isset($_POST['submit_password'])) {
+            $pass = $_POST['password'];
+            $email = $_POST['email'];
+            //dò lại trong session, đối tượng nào có pass giống với pass đó
+            foreach ($_SESSION['email'] as $key => $item) {
+                if ($item['id'] == $pass) {
+                    $salfF = "G435#";
+                    $salfL = "T34a!&";
+                    $passnew = md5($salfF . $pass . $salfL);
+                    //với id đó lấy lại email của người gửi email
+                    $emailold = $item['email'];
+                    $kh = new user();
+                    $kh->updateEmail($emailold, $passnew);
+                    include "./View/doimatkhau.php";
+                    break;
+                } else {
+                    echo '<script> alert("Mã Code Không Hợp Lệ");</script>';
+                    include "./View/resetpw.php";
+                    break;
                 }
             }
-            echo '<script> alert("Đổi Mật khẩu Thành Công");</script>';
-                include "./View/home.php";
+        }
+        break;
+    case 'doimatkhau':
+        include_once "./View/doimatkhau.php";
+        break;
+    case 'doimatkhauemail':
+        include_once "./View/doimatkhau.php";
+        break;
+    case 'doimatkhau_action':
+        if (isset($_POST['doimatkhau'])) {
+            $passcu = $_POST['passcu'];
+            $passmoi = $_POST['passmoi'];
+            $passmoi1 = $_POST['passmoi1'];
+            $salfF = "G435#";
+            $salfL = "T34a!&";
+            $kh = new user();
+            $checkmkhau = $kh->getUser($makh);
+            if (md5($salfF . $passcu . $salfL) == $checkmkhau['matkhau']) {
+                $passmoi = md5($salfF . $passmoi1 . $salfL);
+                $kh->DoiMatKhau($makh, $passmoi);
+                echo '<script> alert("Đổi Mật Khẩu Thành Công");</script>';
+                echo '<meta http-equiv="refresh" content="0;url=./index.php?action=dangnhap&act=dangxuat"/>';
+                break;
+            } else {
+                echo '<script> alert("Mật Khẩu Cũ Không Đúng");</script>';
+                echo '<meta http-equiv="refresh" content="0;url=./index.php?action=forget&act=doimatkhau"/>';
+                break;
+            }
+        }
+        break;
+    case 'doimatkhau_actionemail':
+        if (isset($_POST['doimatkhau'])) {
+            $email = $_SESSION['emailrepass'];
+            $pass = $_POST['passcuemail'];
+            $passmoi = $_POST['passmoi'];
+            $salfF = "G435#";
+            $salfL = "T34a!&";
+            $passold = md5($salfF . $pass . $salfL);
+            $kh = new user();
+            $logkhemail = $kh->logKhachHangemail($email, $passold);
+            if ($logkhemail) {
+                $passnew = md5($salfF . $passmoi . $salfL);
+                $kh->DoiMatKhauemail($email, $passnew);
+                echo '<script> alert("Đổi Mật Khẩu Thành Công");</script>';
+                echo '<meta http-equiv="refresh" content="0;url=./index.php?action=dangnhap"/>';
+                break;
+            } else {
+
+                echo '<script> alert("Đổi Mật Khẩu Không Thành Công");</script>';
+                echo '<meta http-equiv="refresh" content="0;url=./index.php?action=forget&act=doimatkhauemail"/>';
+                break;
+            }
+        } else {
+            echo '<script> alert("Lỗi");</script>';
+            echo '<meta http-equiv="refresh" content="0;url=./index.php?action=home"/>';
             break;
-            // canlam
-            case 'doimatkhau':
-                include_once "./View/doimatkhau.php";
-                break;
-            case 'doimatkhau_action':
-                if(isset($_POST['doimatkhau'])){
-                    $passcu=$_POST['passcu'];
-                    $passmoi=$_POST['passmoi'];
-                    $passmoi1=$_POST['passmoi1'];
-                    $salfF="G435#";
-                    $salfL="T34a!&";
-                    $kh=new user();
-                    $checkmkhau=$kh->getUser($makh);
-                    if (md5($salfF.$passcu.$salfL)==$checkmkhau['matkhau']){
-                            $passmoi = md5($salfF.$passmoi1.$salfL);
-                            $kh->DoiMatKhau($makh,$passmoi);
-                            echo '<script> alert("Đổi Mật Khẩu Thành Công");</script>';
-                            echo '<meta http-equiv="refresh" content="0;url=./index.php?action=home"/>';
-                    }else{
-                        echo '<script> alert("Mật Khẩu Cũ Không Đúng");</script>';
-                            echo '<meta http-equiv="refresh" content="0;url=./index.php?action=forget&act=doimatkhau"/>';
-                    }
-                }
-                break;
-                }
-
-
-
-?>
+        }
+}

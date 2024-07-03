@@ -1,143 +1,133 @@
 <?php
-  if(isset($_GET['id']))
-  {
-    $mahh=$_GET['id'];
+if (isset($_GET['id'])) {
+    $mahh = $_GET['id'];
     // truy vấn thông tin của id
-    $hh=new hanghoa();
-    $kq=$hh->getHangHoaID($mahh);
-    $tenhh=$kq['tenhh'];
-    $gia=$kq['dongia'];
-    $giamgia=$kq['giamgia'];
-    $maloai=$kq['maloai'];//6
-    // $dacbiet=$kq['dacbiet'];
-    // $slx=$kq['soluotxem'];
-    // $ngaylap=$kq['ngaylap'];
-    $mota=$kq['mota'];
-  }
-?>
-<?php
-$ac=1;
-if(isset($_GET['action']))
-{
-  if(isset($_GET['act'])&& $_GET['act']=='insert_hanghoa')
-  {
-    $ac=1;
-    echo "<h1 class='text-center mt-5'>THÊM MẶT HÀNG</h1>";
-  }
-  else
-  {
-    $ac=2;
-    echo "<h1 class='text-center mt-5'>SỬA MẶT HÀNG</h1>";
-  }
+    $hh = new hanghoa();
+    $kq = $hh->getHangHoaID($mahh);
+    $tenhh = $kq['tenhh'];
+    $tenloai = $kq['tenloai'];
+    $maloai = $kq['maloai'];
+    $mota = $kq['mota'];
 }
 ?>
-<div class="row col-md-4 col-md-offset-4 mt-5" >
-  <?php
-    if($ac==1)
-    {
-      echo '<form action="index.php?action=hanghoa&act=insert_action" method="post" enctype="multipart/form-data">';
+<div class="col-12 mt-5">
+    <?php
+    $ac = 1;
+    if (isset($_GET['action'])) {
+        if (isset($_GET['act']) && $_GET['act'] == 'insert_hanghoa') {
+            $ac = 1;
+            echo '<div class="d-flex">
+                <div class="col-2">
+                    <a href="index.php?action=home">
+                        <i class="fa-solid fa-arrow-left fa-xl"></i>
+                    </a>
+                </div>
+                <div class="col-8">
+                    <h1 class="text-center">Thêm Sản Phẩm Mới</h1>
+                </div>
+            </div>';
+        } else {
+            $ac = 2;
+            echo '<div class="d-flex">
+                <div class="col-2">
+                    <a href="index.php?action=home">
+                        <i class="fa-solid fa-arrow-left fa-xl"></i>
+                    </a>
+                </div>
+                <div class="col-8">
+                    <h1 class="text-center">Chỉnh Sửa Sản Phẩm</h1>
+                </div>
+            </div>';
+        }
     }
-    else
-    {
-      echo'<form action="index.php?action=hanghoa&act=update_action" method="post" enctype="multipart/form-data">';
-    }
-  ?>
+    ?>
+    <div class="d-flex col-md-12  mt-5 placecontentcenter mb-5">
+        <?php
+        if ($ac == 1) {
+            echo '<form action="index.php?action=hanghoa&act=insert_action" method="post" enctype="multipart/form-data" class="col-md-12 background p-5">';
+        } else {
+            echo '<form action="index.php?action=hanghoa&act=update_action" method="post" enctype="multipart/form-data" class="col-md-12 background p-5">';
+        }
+        ?>
 
-    <table class="table table-hover" style="border: 0px;">
+        <table class="table table-hover bordernone">
 
-      <?php
-         if ($ac==2) :
-      ?>
-      <tr>
-        <td>Mã hàng</td>
-        <td> <input type="text" class="form-control" name="mahh" value="<?php if(isset($mahh)) echo $mahh;?>" readonly/></td>
-      </tr>
-      <?php endif;?>
-
-      <tr>
-        <td>Tên hàng</td>
-        <td><input type="text" class="form-control" name="tenhh"  value="<?php if(isset($tenhh)) echo $tenhh;?>"  maxlength="100px"></td>
-      </tr>
-      
-      <tr>
-        <td>Mã loại</td>
-        <td>
-          <select name="maloai" class="form-control" style="width:150px;">
-          <option value="">-- Chọn một loại --</option>
             <?php
-            $selectloai=-1;
-            if(isset($maloai) && $maloai!=-1)
-            {
-              $selectloai=$maloai;//6
-            }
-              $loai=new loai();
-              $result=$loai->getLoai();
-              while($set=$result->fetch()):
+            if ($ac == 2) {
             ?>
-            <option value="<?php echo $set['maloai']?>" <?php if($selectloai==$set['maloai']) echo 'selected';?>><?php echo $set['tenloai'];?></option>
-            <?php
-              endwhile;
-            ?>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Giá </td>
-        <td><input type="text" class="form-control"  value="<?php if(isset($gia)) echo $gia;?>" name="dongia" >
-        </td>
-      </tr>
-      <tr>
-        <td>Giảm giá (%)</td>
-        <td><input type="number" class="form-control"  value="<?php if(isset($giamgia)) echo $giamgia;?>" name="giamgia" >
-        </td>
-      </tr>
-      <!-- nếu thêm sản phẩm thì phải có số lượng, hình ảnh, size -->
-      <?php
-        if ($ac === 1) :
-          ?>
-      <tr>
-        <td>Hình ảnh</td>
-        <td><input type="file" class="form-control"  value="" name="image">
-        </td>
-      </tr>
-      <!-- size -->
-      <tr>
-        <td>Size</td>
-        <td>
-            <?php
-              $size=new size();
-              $result=$size->getSize();
-              while($set=$result->fetch()):
-            ?>
+                <tr>
+                    <td>Mã Hàng</td>
+                    <td> <input type="text" class="form-control color-cell" required name="mahh" value="<?php if (isset($mahh)) echo $mahh; ?>" readonly /></td>
+                </tr>
+            <?php } else { ?>
+                <tr>
+                    <td>Mã Hàng</td>
+                    <td> <input type="text" class="form-control color-cell" required name="mahh" value="" readonly /></td>
+                </tr>
+            <?php } ?>
             <tr>
-              <td><input type="checkbox" name="size[]" value="<?php echo $set['Idsize']?>" onchange="enableNumberInput(this)"> <?php echo $set['size'];?></input></td>
-              <td><input type="number" name="soluong[]" class="form-control" id="" placeholder="Số lượng" disabled></td>
+            <tr>
+                <td>Tên Hàng Hóa</td>
+                <td> <input type="text" class="form-control color-cell" autocomplete="off" required name="tenhh" value="<?php if (isset($tenhh)) echo $tenhh; ?>" /></td>
             </tr>
-            
-            <?php
-              endwhile;
-            ?>
-        </td>
-      </tr>
-    <?php endif; ?>
-    <!-- kết thúc số lượng -->
-    <tr>
-      <td>Mô tả</td>
-      <td><input type="text" class="form-control" name="mota" value="<?php if(isset($mota)) echo $mota;?>"></input>
-      </td>
-    </tr>
-    </table>
-      <input class="btn btn-primary" type="submit" value="submit">
-  </form>
+            <td>Mã loại</td>
+            <td>
+                <select name="maloai" class="form-control color-cell w-150px" required>
+                    <option value="">- Chọn một loại -</option>
+                    <?php
+                    $selectloai = -1;
+                    if (isset($maloai) && $maloai != -1) {
+                        $selectloai = $maloai; //6
+                    }
+                    $loai = new loai();
+                    $result = $loai->getLoai();
+                    while ($set = $result->fetch()) :
+                    ?>
+                        <option value="<?php echo $set['maloai'] ?>
+                        " <?php if ($selectloai == $set['maloai'])
+                                echo 'selected'; ?>>
+                            <?php echo $set['tenloai']; ?>
+                        </option>
+                    <?php
+                    endwhile;
+                    ?>
+                </select>
+            </td>
+            </tr>
+            <tr>
+                <td>Mô Tả</td>
+                <td><textarea id="textarea" class="w-100 mh300" name="mota"><?php echo isset($mota) ? $mota : ''; ?></textarea></td>
+            </tr>
+        </table>
+        <div class="col-12  text-center">
+
+            <input class="btn btn-primary col-8 submit" type="submit" value="Xong">
+        </div>
+        </form>
+    </div>
 </div>
+<!-- Place the first <script> tag in your HTML's <head> -->
+<!-- <script src="https://cdn.tiny.cloud/1/5drzlle8kyxd7vxwctef9eo6ky1geilsx9pyit1cgbq72689/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
-function enableNumberInput(checkbox) {
-    var input = checkbox.parentNode.nextElementSibling.querySelector('input[type="number"]');
-    if (checkbox.checked) {
-        input.disabled = false;
-    } else {
-        input.disabled = true;
-        input.value = null;
-    }
-}
-</script>
+    tinymce.init({
+        selector: '#textarea',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        height: 700,
+        mergetags_list: [{
+                value: 'First.Name',
+                title: 'First Name'
+            },
+            {
+                value: 'Email',
+                title: 'Email'
+            },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
+</script> -->
+<!-- <textarea>
+  Welcome to TinyMCE!
+</textarea> -->

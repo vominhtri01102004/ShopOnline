@@ -5,7 +5,7 @@
         //hàm tạo
         function __construct(){
             //vì mỗi lần tạo đối tượng từ connect sẽ kết nối tới dữ liệu
-            $dsn='mysql:host=localhost;dbname=shopgiay';
+            $dsn='mysql:host=localhost;dbname=shopdo';
             $user='root';
             $pass='';
             try {
@@ -39,5 +39,6 @@
             $statement=$this->db->prepare($query);
             return $statement;
         }
+        
     }
 ?>

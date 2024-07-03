@@ -11,6 +11,7 @@
   //   include_once $path.$className.'php';
   // }
   // cách 2
+  include_once "Model/uploadimage.php";
   session_start();
   include_once "Model/class.phpmailer.php";
   set_include_path(get_include_path() . PATH_SEPARATOR . 'Model/');
@@ -18,7 +19,7 @@
   spl_autoload_register();
   ?>
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="en" class="scrollwidthnone">
 
   <head>
     <meta charset="UTF-8">
@@ -30,6 +31,14 @@
     <link href="Content/CSS/style.css" rel="stylesheet">
     <link href="Content/CSS/login.css" rel="stylesheet">
     <script src="Content/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+    <!-- click -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -37,17 +46,30 @@
     $kn = new connect();
     ?>
     <!-- header -->
+    <link rel="shortcut icon" href="Content/imagetourdien/favicon.jpg">
+    <title>Shop Của Trí</title>
     <?php
+    if (isset($_GET['makh']) && $_GET['makh'] != $_SESSION['makh']) {
+      $_GET['makh'] = $_SESSION['makh'];
+    }
     include_once "View/headder.php";
     ?>
+    <?php if (isset($_SESSION['makh'])) { ?>
+      <form action="index.php?action=dangnhap&act=dangxuat" id="offline" method="POST">
+      </form>
+
+    <?php } ?>
+
+
     <!-- hiên thi noi dung -->
+
     <div class="container">
       <div class="row">
         <!-- hien thi noi dung đây -->
         <?php
         //khởi tạo trang chủ
         $ctrl = "home";
-        // index gọi controller kahcs nhau
+        // index gọi controller khác nhau
         if (isset($_GET['action'])) {
           $ctrl = $_GET['action']; //sanpham
         }
@@ -58,8 +80,72 @@
     <!-- hiên thị footer -->
     <?php
     include_once "View/footer.php";
-    // include_once "./View/services.php"
     ?>
+
+
+    <!-- phóng to hình -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function() {
+        // When an image inside a table cell is clicked
+        $('table img, img[name="hinh"]').on('click', function() {
+          // Get the source of the clicked image
+          var src = $(this).attr('src');
+          // Create a modal to display the enlarged image
+          var modal = $('<div class="modal">').css({
+            background: 'rgba(0, 0, 0, 0.7)',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }).appendTo('body');
+
+          // Add the enlarged image to the modal
+          $('<img>').attr('src', src).css({
+            maxWidth: '90%',
+            maxHeight: '90%',
+            borderRadius: '20px',
+            boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)'
+          }).appendTo(modal);
+
+          // When the modal or the enlarged image is clicked, close the modal
+          modal.on('click', function() {
+            $(this).remove();
+          });
+        });
+      });
+    </script>
+
+    <script>
+      //script off nguoi dung
+
+      var idleTime = 0;
+
+      function incrementIdleTime() {
+        idleTime += 10;
+        console.log(idleTime)
+        if (idleTime > 600) {
+          var form = document.getElementById('offline');
+          form.submit();
+        }
+      }
+
+      function resetIdleTime() {
+        idleTime = 0;
+      }
+
+      $(document).on('mousemove mousedown keydown', function() {
+        resetIdleTime();
+      });
+
+      setInterval(incrementIdleTime, 10000);
+    </script>
+
   </body>
 
   </html>

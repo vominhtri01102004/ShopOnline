@@ -17,6 +17,12 @@ switch ($act) {
     case 'sanphamchitiet':
         include_once "./View/sanphamchitiet.php";
         break;
+    case 'sanphamchitietupdate':
+        include_once "./View/sanphamchitiet.php";
+        break;
+    case 'loai':
+        include_once "./View/sanpham.php";
+        break;
     case 'timkiem':
         // nhaanhj giá trị người dùng gõ tìm kiếm và tìm kiếm trên sản phẩm
         include_once "./View/sanpham.php";

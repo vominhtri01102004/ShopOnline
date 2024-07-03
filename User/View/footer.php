@@ -16,8 +16,6 @@
                 <ul class="footer-links">
                     <li class="footerdanhmuc"><a class="danhmucsanpham">Quần</a></li>
                     <li class="footerdanhmuc"><a class="danhmucsanpham">Áo</a></li>
-                    <li class="footerdanhmuc"><a class="danhmucsanpham">Túi Xách</a></li>
-                    <li class="footerdanhmuc"><a class="danhmucsanpham">Túi Xách</a></li>
 
 
                 </ul>
@@ -46,10 +44,10 @@
 
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <ul class="social-icons">
-                    <li><a class="facebook" href="https://www.facebook.com/profile.php?id=100025499735614"><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a class="instagram" href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a class="github" href="https://github.com/vominhtri01102004"><i class="fa-brands fa-github"></i></a></li>
-                    <li><a class="twitter" href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a target="_blank" class="facebook" href="https://www.facebook.com/profile.php?id=100025499735614"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a target="_blank" class="instagram" href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a target="_blank" class="github" href="https://github.com/vominhtri01102004"><i class="fa-brands fa-github"></i></a></li>
+                    <li><a target="_blank" class="zalo" href="https://zalo.me/0359418684"><i class="fa-brands fa-twitter"></i></a></li>
                 </ul>
             </div>
         </div>
